@@ -1,0 +1,46 @@
+# AKAI'S PERSONAL DOCKER!
+# This docker is meant to be used as a personal developing environment in places where I'm not root, or anywhere I like without having to manually customize everything from scratch.
+# It uses Chimera Linux as a base image, which is my favourite distro, structurally speaking.
+
+services:
+  akais_workspace:
+    container_name: chimera-akai
+    build: .
+    image: chimera-akai:latest
+
+    restart: unless-stopped
+    init: true
+    command: sleep 2147483647
+
+    tty: true
+    stdin_open: true
+
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - QT_X11_NO_MITSHM=1
+
+    volumes:
+      # some stuff
+      - ${HOME}:/home/akai/parallel:rw
+      - ${HOME}/.ssh:/home/akai/.ssh:rw
+      - ${HOME}/akai-docker/shared:/home/akai/shared:rw
+      - ${HOME}/.vim:/home/akai/.vim:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - /dev/dri:/dev/dri:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # docker passthrough 
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/lib/docker/cli-plugins:/usr/lib/docker/cli-plugins
+
+    network_mode: host
+    ipc: host
+
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
