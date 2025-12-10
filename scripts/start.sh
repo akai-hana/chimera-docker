@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 # open the host's x server to docker (ghostty, firefox, etc)
 xhost +local:docker
 docker compose up -d
