@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 docker commit chimera-akai chimera-akai:latest
 # 2. Tag for cloud registry
