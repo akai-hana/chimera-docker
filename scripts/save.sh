@@ -2,9 +2,9 @@
 
 docker commit chimera-akai chimera-akai:latest
 # 2. Tag for cloud registry
-docker tag chimera-akai:latest akaihanatsundeee/chimera-akai:latest
+docker tag chimera-akai:latest ghcr.io/akai-hana/chimera-akai:latest
 # 3. Push to cloud
-docker push akaihanatsundeee/chimera-akai:latest
+docker push ghcr.io/akai-hana/chimera-akai:latest
 
 # git sync
 git add .
