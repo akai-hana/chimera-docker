@@ -22,7 +22,7 @@ services:
 
     volumes:
       - ${HOME}:/home/akai/parallel:rw
-      - ${HOME}/.ssh:/home/akai/.ssh:rw
+      - ${HOME}/.ssh:/root/.ssh:rw
       - ${HOME}/akai-docker/shared:/home/akai/shared:rw
       - ${HOME}/.vim:/home/akai/.vim:rw
       - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
