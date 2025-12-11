@@ -5,15 +5,11 @@
 services:
   akais_workspace:
     container_name: chimera-akai
-    build: .
-    image: chimera-akai:latest
+    image: ghcr.io/akai-hana/chimera-akai:latest
 
     restart: unless-stopped
     init: true
-    command: >
-      sh -c "groupadd -g 200028 hostgroup 2>/dev/null || true &&
-             usermod -aG 200028 akai 2>/dev/null || true &&
-             exec sleep 2147483647"
+    command: sleep 999999999
 
     tty: true
     stdin_open: true
@@ -25,17 +21,13 @@ services:
       - QT_X11_NO_MITSHM=1
 
     volumes:
-      # some stuff
       - ${HOME}:/home/akai/parallel:rw
       - ${HOME}/.ssh:/home/akai/.ssh:rw
       - ${HOME}/akai-docker/shared:/home/akai/shared:rw
       - ${HOME}/.vim:/home/akai/.vim:rw
       - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
-      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
       - /dev/dri:/dev/dri:rw
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-
-        # docker passthrough 
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
       - /usr/lib/docker/cli-plugins:/usr/lib/docker/cli-plugins
@@ -47,3 +39,4 @@ services:
       - seccomp:unconfined
     cap_add:
       - SYS_ADMIN
+
