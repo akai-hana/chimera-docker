@@ -9,7 +9,7 @@ services:
 
     restart: unless-stopped
     init: true
-    command: sleep 999999999
+    command: sleep 2147483647
 
     tty: true
     stdin_open: true
