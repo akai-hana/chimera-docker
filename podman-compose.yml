@@ -1,0 +1,39 @@
+# AKAI'S PERSONAL PODMAN!
+# This podman is meant to be used as a personal developing environment in places where I'm not root, or anywhere I like without having to manually customize everything from scratch.
+# It uses Chimera Linux as a base image, which is my favourite distro, structurally speaking.
+
+services:
+  akais_workspace:
+    container_name: chimera-akai
+    image: ghcr.io/akai-hana/chimera-akai:latest
+
+    restart: unless-stopped
+    init: true
+    command: sleep 2147483647
+
+    tty: true
+    stdin_open: true
+
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - LANG=C.UTF-8
+      - LC_ALL=C.UTF-8
+      - QT_X11_NO_MITSHM=1
+
+    volumes:
+      - ${HOME}:/home/akai/parallel:rw
+        # - ${HOME}/.ssh:/root/.ssh:rw
+      - ${HOME}/akai-podman/shared:/home/akai/shared:rw
+      - ${HOME}/.vim:/home/akai/.vim:rw
+      - /tmp/.podman.xauth:/tmp/.podman.xauth:rw
+      - /dev/dri:/dev/dri:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+    network_mode: host
+    ipc: host
+
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
+
